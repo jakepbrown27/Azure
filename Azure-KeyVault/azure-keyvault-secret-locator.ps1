@@ -5,7 +5,7 @@ $initSecretArray = @()
 $initSecretArray = Get-AzKeyVault | Get-AzKeyVaultSecret -ErrorAction SilentlyContinue | Out-GridView -PassThru
 
 #From here, we have options on what do to. In this particular case we'll display the secret info.
-#it is a good idea to go ahead and clear all memory after this runs.
+#It is probably a good idea to go ahead and clear all memory after this runs.
 foreach($secret in $initSecretArray){
     #get specific secret info
     $secretInfo = Get-AzKeyVaultSecret -VaultName $secret.VaultName -Name $secret.Name
@@ -20,9 +20,9 @@ foreach($secret in $initSecretArray){
     Write-Host "Secret Value is:" $secretValueText
 }
 
-#just clear all variables
-$initSecretArray.clear()
-$secretInfo.clear()
+#Clear all variables
+$initSecretArray = $null
+$secretInfo = $null
 $secretValueText = $null
 $ssPtr = $null
 
