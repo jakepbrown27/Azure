@@ -20,7 +20,7 @@ $installers = @(
          Name       = "Azure Virtual Desktop Agent Bootloader"
          Url        = "https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrxrH"
          FileName   = "AVDAgentBootloader.msi"
-         NeedsToken = $true
+         NeedsToken = $false
     },
     [PSCustomObject]@{
          Name       = "Windows Virtual Desktop Side-by-Side Stack"
