@@ -1,6 +1,8 @@
+$registrationToken = ""
 
 # Define the registration token 
-$registrationToken = ""
+$sxsMsi = (Get-ChildItem "$env:SystemDrive\Program Files\Microsoft RDInfra\" | ? Name -like SxSStack*.msi | Sort-Object CreationTime -Descending | Select-Object -First 1).FullName
+
 
 # Define installer details for the components.
 # For each component, we specify:
@@ -24,8 +26,7 @@ $installers = @(
     },
     [PSCustomObject]@{
          Name       = "Windows Virtual Desktop Side-by-Side Stack"
-         Url        = "https://go.microsoft.com/fwlink/?linkid=2084270"
-         FileName   = "WVDsxsStack.msi"
+         LocalPath  = $sxsMsi
          NeedsToken = $false
     },
     [PSCustomObject]@{
@@ -112,14 +113,10 @@ foreach ($installer in $installers) {
         $msiPath = $destination
     }
     
-    Install-MSI -MsiPath $msiPath `
-                -ProductName $installer.Name `
-                -NeedsToken $installer.NeedsToken `
-                -RegistrationToken $registrationToken
 }
 
 Set-ItemProperty -Path "HKLM:\Software\Microsoft\RDInfraAgent" -Name "IsRegistered" -Value 1
 
 Write-Output "Reinstallation of all components completed."
-
+Restart-Computer
  
