@@ -14,13 +14,13 @@ $sxsMsi = (Get-ChildItem "$env:SystemDrive\Program Files\Microsoft RDInfra\" | ?
 $installers = @(
     [PSCustomObject]@{
          Name       = "Azure Virtual Desktop Agent"
-         Url        = "https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrmXv"
+         Url        = "https://go.microsoft.com/fwlink/?linkid=2310011"
          FileName   = "AVDAgent.msi"
          NeedsToken = $true
     },
     [PSCustomObject]@{
          Name       = "Azure Virtual Desktop Agent Bootloader"
-         Url        = "https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrxrH"
+         Url        = "https://go.microsoft.com/fwlink/?linkid=2311028"
          FileName   = "AVDAgentBootloader.msi"
          NeedsToken = $false
     },
