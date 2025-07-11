@@ -1,9 +1,6 @@
 $registrationToken = ""
 
 # Define the registration token 
-$sxsMsi = (Get-ChildItem "$env:SystemDrive\Program Files\Microsoft RDInfra\" | ? Name -like SxSStack*.msi | Sort-Object CreationTime -Descending | Select-Object -First 1).FullName
-
-
 # Define installer details for the components.
 # For each component, we specify:
 #   - Name: A descriptive name for logging.
@@ -22,16 +19,6 @@ $installers = @(
          Name       = "Azure Virtual Desktop Agent Bootloader"
          Url        = "https://go.microsoft.com/fwlink/?linkid=2311028"
          FileName   = "AVDAgentBootloader.msi"
-         NeedsToken = $false
-    },
-    [PSCustomObject]@{
-         Name       = "Windows Virtual Desktop Side-by-Side Stack"
-         LocalPath  = $sxsMsi
-         NeedsToken = $false
-    },
-    [PSCustomObject]@{
-         Name       = "Microsoft RD Geneva Installer"
-         LocalPath  = "C:\Program Files\Microsoft RDInfra\Microsoft.RDInfra.Geneva.Installer-x64-46.5.1"
          NeedsToken = $false
     }
 )
