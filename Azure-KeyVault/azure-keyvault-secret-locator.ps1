@@ -2,7 +2,7 @@
 $initSecretArray = @()
 
 #get a list of accessible key vaults, and secrets within those key vaults. This will only return secrets that you already have access to.
-$initSecretArray = Get-AzKeyVault | Get-AzKeyVaultSecret -ErrorAction SilentlyContinue | Out-GridView -PassThru
+$initSecretArray = Get-AzKeyVault | Get-AzKeyVaultSecret  -ErrorAction SilentlyContinue | Select-Object 'VaultName', "Name", 'ContentType' | Out-GridView -PassThru
 
 #From here, we have options on what do to. In this particular case we'll display the secret info.
 #It is probably a good idea to go ahead and clear all memory after this runs.
@@ -21,10 +21,10 @@ foreach($secret in $initSecretArray){
 }
 
 #Clear all variables
-$initSecretArray = $null
-$secretInfo = $null
-$secretValueText = $null
-$ssPtr = $null
+#$initSecretArray = $null
+#$secretInfo = $null
+#$secretValueText = $null
+#$ssPtr = $null
 
 #run garbage collection to just clear any used memory (this may or may not work)
 [System.GC]::Collect()
